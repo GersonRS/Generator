@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:mtl="http://www.eclipse.org/acceleo/mtl/3.0" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore">
+  <mtl:Module name="gameRender" nsURI="org::eclipse::acceleo::module::example::uml2java::helios::common::gameRender" startHeaderPosition="38" endHeaderPosition="97">
+    <input>
+      <takesTypesFrom href="http://www.eclipse.org/uml2/3.0.0/UML#/"/>
+    </input>
+    <imports href="common.emtl#/0"/>
+    <ownedModuleElement xsi:type="mtl:Template" name="generateClassGameRender" visibility="Public">
+      <body xsi:type="mtl:TemplateInvocation">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <definition href="common.emtl#/0/packageBlock"/>
+        <argument xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="/0/generateClassGameRender/c">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </argument>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#xA;"/>
+      <body xsi:type="mtl:TemplateInvocation">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <definition href="common.emtl#/0/_commentBodyBlock"/>
+        <argument xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/7">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </argument>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#xA;import java.awt.AlphaComposite;&#xA;import java.awt.Color;&#xA;import java.awt.Dimension;&#xA;import java.awt.Graphics2D;&#xA;import java.awt.image.BufferStrategy;&#xA;import java.awt.image.BufferedImage;&#xA;import java.io.IOException;&#xA;import java.util.ArrayList;&#xA;import java.util.HashMap;&#xA;import java.util.Map;&#xA;&#xA;import javax.swing.JFrame;&#xA;&#xA;import model.Cenario;&#xA;import model.Elemento;&#xA;import model.ImageManager;&#xA;import controller.GameController;&#xA;&#xA;public class GameRenderer extends JFrame {&#xA;&#x9;private static final long serialVersionUID = 1L;&#xA;&#xA;&#x9;private BufferStrategy bufferStrategy;&#xA;&#x9;private BufferedImage tela;&#xA;&#x9;private Graphics2D g, g2d;&#xA;&#xA;&#x9;private HashMap&lt;String, ArrayList&lt;Elemento>> elementos;&#xA;&#x9;private HashMap&lt;String, Cenario> cenarios;&#xA;&#xA;&#x9;public GameRenderer(Elemento elemento,&#xA;&#x9;&#x9;&#x9;HashMap&lt;String, ArrayList&lt;Elemento>> elementos,&#xA;&#x9;&#x9;&#x9;HashMap&lt;String, Cenario> cenarios) {&#xA;&#x9;&#x9;this.setTitle(&quot;SPL de Jogos Digitais&quot;);&#xA;&#x9;&#x9;this.setSize(GameController.width, GameController.height);&#xA;&#x9;&#x9;this.setLocationRelativeTo(null);&#xA;&#x9;&#x9;this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);&#xA;&#x9;&#x9;this.setUndecorated(true);&#xA;&#x9;&#x9;this.setIgnoreRepaint(true);&#xA;&#x9;&#x9;this.setVisible(true);&#xA;&#x9;&#x9;this.createBufferStrategy(2);&#xA;&#x9;&#x9;this.setPreferredSize(new Dimension(GameController.width,&#xA;&#x9;&#x9;&#x9;&#x9;GameController.height));&#xA;&#x9;&#x9;this.setFocusable(true);&#xA;&#x9;&#x9;this.requestFocus();&#xA;&#xA;&#x9;&#x9;this.elementos = elementos;&#xA;&#x9;&#x9;this.cenarios = cenarios;&#xA;&#xA;&#x9;&#x9;bufferStrategy = this.getBufferStrategy();&#xA;&#xA;&#x9;&#x9;g2d = (Graphics2D) bufferStrategy.getDrawGraphics();&#xA;&#x9;&#x9;g2d.setColor(Color.BLACK);&#xA;&#x9;&#x9;g2d.fillRect(0, 0, GameController.width, GameController.height);&#xA;&#x9;&#x9;g2d.dispose();&#xA;&#x9;&#x9;bufferStrategy.show();&#xA;&#x9;}&#xA;&#xA;&#x9;public void init() {&#xA;&#x9;&#x9;try {&#xA;&#x9;&#x9;&#x9;for (Cenario cenario : cenarios.values()) {&#xA;&#x9;&#x9;&#x9;&#x9;desenhaCamadas(cenario);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;} catch (IOException e) {&#xA;&#x9;&#x9;&#x9;e.printStackTrace();&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * Desenha as camadas que compõe o cenário&#xA;&#x9; * &#xA;&#x9; * @return void&#xA;&#x9; * @throws IOException&#xA;&#x9; */&#xA;&#xA;&#x9;private void desenhaCamadas(Cenario cenario) throws IOException {&#xA;&#x9;&#x9;for (Map.Entry&lt;String, int"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[][]">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="> entry : cenario.getCamadas().entrySet()) {&#xA;&#x9;&#x9;&#x9;BufferedImage layer = new BufferedImage(&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;(int) cenario.getPos().width,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;(int) cenario.getPos().height,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;BufferedImage.TYPE_4BYTE_ABGR);&#xA;&#x9;&#x9;&#x9;for (int i = 0; i &lt; cenario.getHeight(); i++) {&#xA;&#x9;&#x9;&#x9;&#x9;for (int j = 0; j &lt; cenario.getWidth(); j++) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;int tile = (entry.getValue()"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[i][j]">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" != 0) ? (entry&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;.getValue()"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[i][j]">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" - 1) : 0;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;int tileRow = (tile / 8) | 0;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;int tileCol = (tile % 8) | 0;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;layer.getGraphics().drawImage(&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;ImageManager.getInstance().loadImage(&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;cenario.getSource()),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(j * cenario.getTileWidth()),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(i * cenario.getTileHeight()),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(j * cenario.getTileWidth())&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;+ cenario.getTileWidth(),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(i * cenario.getTileHeight())&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;+ cenario.getTileHeight(),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(tileCol * cenario.getTileWidth()),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(tileRow * cenario.getTileHeight()),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(tileCol * cenario.getTileWidth())&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;+ cenario.getTileWidth(),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(tileRow * cenario.getTileHeight())&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;+ cenario.getTileHeight(), null);&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;cenario.getLayers().put(entry.getKey(), layer);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&#x9;public void paint() {&#xA;&#x9;&#x9;try {&#xA;&#x9;&#x9;&#x9;g = (Graphics2D) tela.getGraphics();&#xA;&#xA;&#x9;&#x9;&#x9;renderInferior(g);&#xA;&#x9;&#x9;&#x9;renderElementos(g);&#xA;&#x9;&#x9;&#x9;renderSuperior(g);&#xA;&#xA;&#x9;&#x9;&#x9;g2d = (Graphics2D) bufferStrategy.getDrawGraphics();&#xA;&#x9;&#x9;&#x9;g2d.drawImage(&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;tela,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;(int) cenarios.get(GameController.currentCenario).getPos().x,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;(int) cenarios.get(GameController.currentCenario).getPos().y,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;null);&#xA;&#x9;&#x9;&#x9;g2d.setColor(Color.WHITE);&#xA;&#x9;&#x9;&#x9;g2d.setComposite(AlphaComposite.SrcOver&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;.derive(GameController.alpha));&#xA;&#x9;&#x9;&#x9;g2d.fillRect(0, 0, 800, 600);&#xA;&#x9;&#x9;&#x9;g2d.dispose();&#xA;&#x9;&#x9;&#x9;bufferStrategy.show();&#xA;&#x9;&#x9;} catch (IOException e) {&#xA;&#x9;&#x9;&#x9;e.printStackTrace();&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&#x9;public void currentCenario() {&#xA;&#x9;&#x9;tela = new BufferedImage((int) cenarios.get(&#xA;&#x9;&#x9;&#x9;&#x9;GameController.currentCenario).getPos().width, (int) cenarios&#xA;&#x9;&#x9;&#x9;&#x9;.get(GameController.currentCenario).getPos().height,&#xA;&#x9;&#x9;&#x9;&#x9;BufferedImage.TYPE_4BYTE_ABGR);&#xA;&#x9;}&#xA;&#xA;&#x9;protected void renderElementos(Graphics2D g) throws IOException {&#xA;&#x9;&#x9;for (Elemento elemento : elementos.get(GameController.currentCenario)) {&#xA;&#x9;&#x9;&#x9;if (elemento.isVisivel()) {&#xA;&#x9;&#x9;&#x9;&#x9;g.drawImage(&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;elemento.getImage(),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(int) (elemento.getPos().x),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(int) (elemento.getPos().y),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(int) (elemento.getPos().x + elemento.getPos().width),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(int) (elemento.getPos().y + elemento.getPos().height),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(int) ((elemento.getAnimates() % elemento&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;.getNumFrames()) * elemento.getPos().width),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(int) (elemento.getDirection() * elemento.getPos().height),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(int) (((elemento.getAnimates() % elemento&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;.getNumFrames()) * elemento.getPos().width) + elemento&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;.getPos().width),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(int) ((elemento.getDirection() * elemento.getPos().height) + elemento&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;.getPos().height), null);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * Metodo que desenha uma camada especificada por parametro&#xA;&#x9; * &#xA;&#x9; * @param g&#xA;&#x9; *            Graphics onde a camada será desenhado&#xA;&#x9; * @param name&#xA;&#x9; *            Nome da camada a ser desenhada&#xA;&#x9; * &#xA;&#x9; * @return void&#xA;&#x9; */&#xA;&#x9;public void render(Graphics2D g, String name) {&#xA;&#x9;&#x9;g.drawImage(cenarios.get(GameController.currentCenario).getLayers()&#xA;&#x9;&#x9;&#x9;&#x9;.get(name), 0, 0, null);&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * Metodo que desenha todas as camadas de uma vez&#xA;&#x9; * &#xA;&#x9; * @param g&#xA;&#x9; *            Graphics onde todas as camadas seram desenhadas&#xA;&#x9; * &#xA;&#x9; * @return void&#xA;&#x9; */&#xA;&#x9;public void render(Graphics2D g) {&#xA;&#x9;&#x9;for (BufferedImage img : cenarios.get(GameController.currentCenario)&#xA;&#x9;&#x9;&#x9;&#x9;.getLayers().values()) {&#xA;&#x9;&#x9;&#x9;g.drawImage(img, 0, 0, null);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * Metodo que desenha as camadas inferiores&#xA;&#x9; * &#xA;&#x9; * @param g&#xA;&#x9; *            Graphics onde as camadas bases seram desenhadas&#xA;&#x9; * &#xA;&#x9; * @return void&#xA;&#x9; */&#xA;&#x9;public void renderInferior(Graphics2D g) {&#xA;&#x9;&#x9;for (String string : cenarios.get(GameController.currentCenario)&#xA;&#x9;&#x9;&#x9;&#x9;.getLayersInferiores()) {&#xA;&#x9;&#x9;&#x9;render(g, string);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * Metodo que desenha as camadas superiores&#xA;&#x9; * &#xA;&#x9; * @param g&#xA;&#x9; *            Graphics onde as camadas da superficie seram desenhadas&#xA;&#x9; * &#xA;&#x9; * @return void&#xA;&#x9; */&#xA;&#x9;public void renderSuperior(Graphics2D g) {&#xA;&#x9;&#x9;for (String string : cenarios.get(GameController.currentCenario)&#xA;&#x9;&#x9;&#x9;&#x9;.getLayersSuperiores()) {&#xA;&#x9;&#x9;&#x9;render(g, string);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;}"/>
+      <parameter name="c">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+      </parameter>
+    </ownedModuleElement>
+  </mtl:Module>
+  <ecore:EPackage name="additions">
+    <eClassifiers xsi:type="ecore:EClass" name="String_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Integer_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Real_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Real"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EObject_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      </eAnnotations>
+      <eOperations name="generateClassGameRender">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/generateClassGameRender"/>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="c">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="packageBlock">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL">
+          <references href="common.emtl#/0/packageBlock"/>
+        </eAnnotations>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="cl">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="_commentBodyBlock">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL">
+          <references href="common.emtl#/0/_commentBodyBlock"/>
+        </eAnnotations>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="traceabilityContext">
+          <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OclAny_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Collection(T)_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Collection(T)"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Sequence(T)_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Sequence(T)"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OrderedSet(T)_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OrderedSet(T)"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Class_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Operation_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Operation"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Classifier_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Parameter_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Parameter"/>
+      </eAnnotations>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ecore:EAnnotation source="positions">
+    <eAnnotations source="positions.0" references="/0/generateClassGameRender">
+      <details key="start" value="118"/>
+      <details key="end" value="6412"/>
+      <details key="line" value="7"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1" references="/0/generateClassGameRender/@body.0">
+      <details key="start" value="172"/>
+      <details key="end" value="188"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.2" references="/0/generateClassGameRender/@body.0/c">
+      <details key="start" value="172"/>
+      <details key="end" value="173"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.3" references="/0/generateClassGameRender/@body.1">
+      <details key="start" value="190"/>
+      <details key="end" value="192"/>
+      <details key="line" value="9"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4" references="/0/generateClassGameRender/@body.2">
+      <details key="start" value="193"/>
+      <details key="end" value="212"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5" references="/0/generateClassGameRender/@body.2/self">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.6" references="/0/generateClassGameRender/@body.3">
+      <details key="start" value="214"/>
+      <details key="end" value="2186"/>
+      <details key="line" value="11"/>
+    </eAnnotations>
+    <eAnnotations source="positions.7" references="/0/generateClassGameRender/@body.4">
+      <details key="start" value="2187"/>
+      <details key="end" value="2193"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.8" references="/0/generateClassGameRender/@body.5">
+      <details key="start" value="2195"/>
+      <details key="end" value="2527"/>
+      <details key="line" value="86"/>
+    </eAnnotations>
+    <eAnnotations source="positions.9" references="/0/generateClassGameRender/@body.6">
+      <details key="start" value="2528"/>
+      <details key="end" value="2536"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.10" references="/0/generateClassGameRender/@body.7">
+      <details key="start" value="2538"/>
+      <details key="end" value="2572"/>
+      <details key="line" value="93"/>
+    </eAnnotations>
+    <eAnnotations source="positions.11" references="/0/generateClassGameRender/@body.8">
+      <details key="start" value="2573"/>
+      <details key="end" value="2581"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.12" references="/0/generateClassGameRender/@body.9">
+      <details key="start" value="2583"/>
+      <details key="end" value="6400"/>
+      <details key="line" value="94"/>
+    </eAnnotations>
+    <eAnnotations source="positions.13" references="/0/generateClassGameRender/c">
+      <details key="start" value="159"/>
+      <details key="end" value="168"/>
+      <details key="line" value="7"/>
+    </eAnnotations>
+  </ecore:EAnnotation>
+</xmi:XMI>

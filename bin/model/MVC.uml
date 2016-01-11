@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_RyONsLZBEeWZwYkJ7VRa0A" name="model">
+  <packagedElement xmi:type="uml:Package" xmi:id="view" name="view">
+    <packagedElement xmi:type="uml:Class" xmi:id="GameRenderer" name="GameRenderer"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="controller" name="controller">
+    <packagedElement xmi:type="uml:Class" xmi:id="GameController" name="GameController"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="InputManager" name="InputManager" clientDependency="_-A3GkLZBEeWZwYkJ7VRa0A _-qIGALZBEeWZwYkJ7VRa0A">
+      <interfaceRealization xmi:id="_-A3GkLZBEeWZwYkJ7VRa0A" name="InterfaceRealization1" supplier="KeyListener" client="InputManager" contract="KeyListener"/>
+      <interfaceRealization xmi:id="_-qIGALZBEeWZwYkJ7VRa0A" name="InterfaceRealization2" supplier="MouseInputListener" client="InputManager" contract="MouseInputListener"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="MainLoop" name="MainLoop"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="LoopSteps" name="LoopSteps">
+      <ownedOperation xmi:id="_RV_SwLZDEeWZwYkJ7VRa0A" name="setup"/>
+      <ownedOperation xmi:id="_SIyosLZDEeWZwYkJ7VRa0A" name="processLogics">
+        <ownedParameter xmi:id="_VwH7wLZDEeWZwYkJ7VRa0A" name="i" type="int" isUnique="false"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_YgDFsLZDEeWZwYkJ7VRa0A" name="renderGraphics"/>
+      <ownedOperation xmi:id="_Z57CsLZDEeWZwYkJ7VRa0A" name="tearDown"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="KeyListener" name="KeyListener"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="MouseInputListener" name="MouseInputListener"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="model" name="model">
+    <packagedElement xmi:type="uml:Class" xmi:id="GameLogic" name="GameLogic" clientDependency="_iXRe8LZCEeWZwYkJ7VRa0A">
+      <interfaceRealization xmi:id="_iXRe8LZCEeWZwYkJ7VRa0A" name="InterfaceRealization1" supplier="Acoes" client="GameLogic" contract="Acoes"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="Acoes" name="Acoes">
+      <generalization xmi:id="_jdYLYLZCEeWZwYkJ7VRa0A" general="Movimento"/>
+      <generalization xmi:id="_j4sOYLZCEeWZwYkJ7VRa0A" general="Colisao"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="Movimento" name="Movimento">
+      <ownedComment xmi:id="_KMGe8LZDEeWZwYkJ7VRa0A">
+        <body>controller.InputManager</body>
+      </ownedComment>
+      <ownedOperation xmi:id="_wthy0LZCEeWZwYkJ7VRa0A" name="mover">
+        <ownedParameter xmi:id="_zlnaQLZCEeWZwYkJ7VRa0A" name="i" type="InputManager" isUnique="false"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="Colisao" name="Colisao">
+      <ownedComment xmi:id="_KMGe8LZDEeWZwYkJ7VRa0A">
+        <body>java.awt.geom.Rectangle2D</body>
+      </ownedComment>
+      <ownedOperation xmi:id="_Ee2oQLZDEeWZwYkJ7VRa0A" name="getColisao">
+        <ownedParameter xmi:id="_G5Q1MLZDEeWZwYkJ7VRa0A" type="_4qzLYLZCEeWZwYkJ7VRa0A" direction="return"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="Audio" name="Audio"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="Cenario" name="Cenario"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="Elemento" name="Elemento" clientDependency="_i5dmALZCEeWZwYkJ7VRa0A">
+      <interfaceRealization xmi:id="_i5dmALZCEeWZwYkJ7VRa0A" name="InterfaceRealization1" supplier="Acoes" client="Elemento" contract="Acoes"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="Personagem" name="Personagem" isLeaf="true">
+      <generalization xmi:id="_keTc4LZCEeWZwYkJ7VRa0A" general="Elemento"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="Obstaculo" name="Obstaculo" isLeaf="true">
+      <generalization xmi:id="_k5GigLZCEeWZwYkJ7VRa0A" general="Elemento"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="ImageManager" name="ImageManager"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_4qzLYLZCEeWZwYkJ7VRa0A" name="Rectangle2D.Double"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="String" name="String"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="int" name="int"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="Integer" name="int"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="Decimal" name="double"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="Boolean" name="boolean"/>
+</uml:Model>

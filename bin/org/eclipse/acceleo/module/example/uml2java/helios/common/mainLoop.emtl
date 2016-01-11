@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:mtl="http://www.eclipse.org/acceleo/mtl/3.0" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore">
+  <mtl:Module name="mainLoop" nsURI="org::eclipse::acceleo::module::example::uml2java::helios::common::mainLoop" startHeaderPosition="38" endHeaderPosition="95">
+    <input>
+      <takesTypesFrom href="http://www.eclipse.org/uml2/3.0.0/UML#/"/>
+    </input>
+    <imports href="common.emtl#/0"/>
+    <ownedModuleElement xsi:type="mtl:Template" name="generateClassMainLoop" visibility="Public">
+      <body xsi:type="mtl:TemplateInvocation">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <definition href="common.emtl#/0/packageBlock"/>
+        <argument xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="/0/generateClassMainLoop/c">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </argument>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#xA;"/>
+      <body xsi:type="mtl:TemplateInvocation">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <definition href="common.emtl#/0/_commentBodyBlock"/>
+        <argument xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/7">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </argument>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#xA;public class MainLoop implements Runnable {&#xA;&#x9;public static final int DEFAULT_UPS = 80;&#xA;&#x9;public static final int DEFAULT_NO_DELAYS_PER_YIELD = 16;&#xA;&#x9;public static final int DEFAULT_MAX_FRAME_SKIPS = 5;&#xA;&#xA;&#x9;private int tick;&#xA;&#xA;&#x9;public static long tempo;&#xA;&#xA;&#x9;private LoopSteps game;&#xA;&#x9;private long desiredUpdateTime;&#xA;&#x9;private boolean running;&#xA;&#xA;&#x9;private long afterTime;&#xA;&#x9;private long beforeTime = System.currentTimeMillis();&#xA;&#xA;&#x9;private long overSleepTime = 0;&#xA;&#x9;private long excessTime = 0;&#xA;&#xA;&#x9;private int noDelaysPerYield = DEFAULT_NO_DELAYS_PER_YIELD;&#xA;&#x9;private int maxFrameSkips = DEFAULT_MAX_FRAME_SKIPS;&#xA;&#xA;&#x9;int noDelays = 0;&#xA;&#xA;&#x9;public MainLoop(LoopSteps loopSteps, int ups, int maxFrameSkips,&#xA;&#x9;&#x9;&#x9;int noDelaysPerYield) {&#xA;&#x9;&#x9;super();&#xA;&#xA;&#x9;&#x9;if (ups &lt; 1)&#xA;&#x9;&#x9;&#x9;throw new IllegalArgumentException(&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&quot;Você deve exibir, pelo menos, um quadro por segundo!&quot;);&#xA;&#xA;&#x9;&#x9;if (ups > 1000)&#xA;&#x9;&#x9;&#x9;ups = 1000;&#xA;&#xA;&#x9;&#x9;this.game = loopSteps;&#xA;&#x9;&#x9;this.desiredUpdateTime = 1000000000L / ups;&#xA;&#x9;&#x9;this.running = true;&#xA;&#xA;&#x9;&#x9;this.maxFrameSkips = maxFrameSkips;&#xA;&#x9;&#x9;this.noDelaysPerYield = noDelaysPerYield;&#xA;&#x9;}&#xA;&#xA;&#x9;public MainLoop(LoopSteps loopSteps, int ups) {&#xA;&#x9;&#x9;this(loopSteps, ups, DEFAULT_MAX_FRAME_SKIPS,&#xA;&#x9;&#x9;&#x9;&#x9;DEFAULT_NO_DELAYS_PER_YIELD);&#xA;&#x9;}&#xA;&#xA;&#x9;public MainLoop(LoopSteps loopSteps) {&#xA;&#x9;&#x9;this(loopSteps, DEFAULT_UPS);&#xA;&#x9;}&#xA;&#xA;&#x9;private void sleep(long nanos) throws InterruptedException {&#xA;&#x9;&#x9;noDelays = 0;&#xA;&#x9;&#x9;long beforeSleep = System.nanoTime();&#xA;&#x9;&#x9;Thread.sleep(nanos / 1000000L, (int) (nanos % 1000000L));&#xA;&#x9;&#x9;overSleepTime = System.nanoTime() - beforeSleep - nanos;&#xA;&#x9;}&#xA;&#xA;&#x9;private void yieldIfNeed() {&#xA;&#x9;&#x9;if (++noDelays == noDelaysPerYield) {&#xA;&#x9;&#x9;&#x9;Thread.yield();&#xA;&#x9;&#x9;&#x9;noDelays = 0;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&#x9;private long calculateSleepTime() {&#xA;&#x9;&#x9;return desiredUpdateTime - (afterTime - beforeTime) - overSleepTime;&#xA;&#x9;}&#xA;&#xA;&#x9;public void run() {&#xA;&#x9;&#x9;running = true;&#xA;&#x9;&#x9;long tempAnterior = System.nanoTime();&#xA;&#x9;&#x9;try {&#xA;&#x9;&#x9;&#x9;game.setup();&#xA;&#x9;&#x9;&#x9;while (running) {&#xA;&#x9;&#x9;&#x9;&#x9;tick++;&#xA;&#x9;&#x9;&#x9;&#x9;tempo = System.nanoTime() - tempAnterior;&#xA;&#x9;&#x9;&#x9;&#x9;tempAnterior = System.nanoTime();&#xA;&#x9;&#x9;&#x9;&#x9;beforeTime = System.nanoTime();&#xA;&#x9;&#x9;&#x9;&#x9;skipFramesInExcessTime();&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;game.processLogics(tick);&#xA;&#x9;&#x9;&#x9;&#x9;game.renderGraphics();&#xA;&#x9;&#x9;&#x9;&#x9;afterTime = System.nanoTime();&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;long sleepTime = calculateSleepTime();&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;if (sleepTime >= 0)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;sleep(sleepTime);&#xA;&#x9;&#x9;&#x9;&#x9;else {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;excessTime -= sleepTime;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;overSleepTime = 0L;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;yieldIfNeed();&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;} catch (Exception e) {&#xA;&#x9;&#x9;&#x9;throw new RuntimeException(&quot;Exception during game loop&quot;, e);&#xA;&#x9;&#x9;} finally {&#xA;&#x9;&#x9;&#x9;running = false;&#xA;&#x9;&#x9;&#x9;game.tearDown();&#xA;&#x9;&#x9;&#x9;System.exit(0);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&#x9;private void skipFramesInExcessTime() {&#xA;&#x9;&#x9;int skips = 0;&#xA;&#x9;&#x9;while ((excessTime > desiredUpdateTime) &amp;&amp; (skips &lt; maxFrameSkips)) {&#xA;&#x9;&#x9;&#x9;excessTime -= desiredUpdateTime;&#xA;&#x9;&#x9;&#x9;game.processLogics(tick);&#xA;&#x9;&#x9;&#x9;tick++;&#xA;&#x9;&#x9;&#x9;skips++;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&#x9;public void stop() {&#xA;&#x9;&#x9;running = false;&#xA;&#x9;}&#xA;&#xA;}&#xA;"/>
+      <parameter name="c">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+      </parameter>
+    </ownedModuleElement>
+  </mtl:Module>
+  <ecore:EPackage name="additions">
+    <eClassifiers xsi:type="ecore:EClass" name="String_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Integer_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Real_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Real"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EObject_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      </eAnnotations>
+      <eOperations name="generateClassMainLoop">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/generateClassMainLoop"/>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="c">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="packageBlock">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL">
+          <references href="common.emtl#/0/packageBlock"/>
+        </eAnnotations>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="cl">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="_commentBodyBlock">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL">
+          <references href="common.emtl#/0/_commentBodyBlock"/>
+        </eAnnotations>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="traceabilityContext">
+          <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OclAny_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Collection(T)_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Collection(T)"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Sequence(T)_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Sequence(T)"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OrderedSet(T)_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OrderedSet(T)"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Class_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Operation_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Operation"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Classifier_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Parameter_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Parameter"/>
+      </eAnnotations>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ecore:EAnnotation source="positions">
+    <eAnnotations source="positions.0" references="/0/generateClassMainLoop">
+      <details key="start" value="116"/>
+      <details key="end" value="2968"/>
+      <details key="line" value="7"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1" references="/0/generateClassMainLoop/@body.0">
+      <details key="start" value="168"/>
+      <details key="end" value="184"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.2" references="/0/generateClassMainLoop/@body.0/c">
+      <details key="start" value="168"/>
+      <details key="end" value="169"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.3" references="/0/generateClassMainLoop/@body.1">
+      <details key="start" value="186"/>
+      <details key="end" value="188"/>
+      <details key="line" value="9"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4" references="/0/generateClassMainLoop/@body.2">
+      <details key="start" value="189"/>
+      <details key="end" value="208"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5" references="/0/generateClassMainLoop/@body.2/self">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.6" references="/0/generateClassMainLoop/@body.3">
+      <details key="start" value="210"/>
+      <details key="end" value="2956"/>
+      <details key="line" value="11"/>
+    </eAnnotations>
+    <eAnnotations source="positions.7" references="/0/generateClassMainLoop/c">
+      <details key="start" value="155"/>
+      <details key="end" value="164"/>
+      <details key="line" value="7"/>
+    </eAnnotations>
+  </ecore:EAnnotation>
+</xmi:XMI>
